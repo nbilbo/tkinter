@@ -1,2 +1,2 @@
-# tkinter_helper
- algumas classes que costumo usar
+# tkinter
+ alguns exemplos utilizando o modulo tkinter do python.
