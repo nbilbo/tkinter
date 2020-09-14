@@ -1,5 +1,12 @@
+
+from os.path import dirname, realpath, join
 from datetime import date
 from tkinter import (Tk, Frame, Button, Label, Spinbox, font, PhotoImage)
+
+
+CURRENT_DIR = dirname(realpath(__file__))
+CALC_PNG = join(CURRENT_DIR, 'imgs', 'calc.png')
+USER_PNG = join(CURRENT_DIR, 'imgs', 'user.png')
 
 
 def get_formated_date():
@@ -49,7 +56,7 @@ class Program(Tk):
 		self.input_birth = Spinbox(left_frame, from_=0, to=9999)
 
 		#widgets for right_frame
-		img = PhotoImage(file='imgs/user.png')
+		img = PhotoImage(file=USER_PNG)
 		label_img = Label(right_frame, image=img)
 		label_img.img = img
 
@@ -68,7 +75,7 @@ class Program(Tk):
 		main_frame.pack_propagate(False)
 
 	def create_button(self):
-		img = PhotoImage(file='imgs/calc.png')
+		img = PhotoImage(file=CALC_PNG)
 
 		button = Button(self, text='Calcular', image=img, compound='left')
 		button.image = img
@@ -92,6 +99,7 @@ class Program(Tk):
 def main():
 	program = Program()
 	program.execute()
+	pass
 
 if __name__ == '__main__':
 	main()
