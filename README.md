@@ -1,2 +1,2 @@
 # tkinter
- alguns exemplos utilizando o modulo tkinter do python.
+ alguns exemplos utilizando o pacote tkinter do python.
