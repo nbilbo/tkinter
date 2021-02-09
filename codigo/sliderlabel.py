@@ -1,4 +1,5 @@
 from tkinter import Frame, Spinbox, Scale
+from tkinter.ttk import Label as LabelTtk
 
 
 class Model(object):
@@ -27,18 +28,30 @@ class Model(object):
 
 
 class View(Frame):
-    def __init__(self, master, controller, minimum, maximum, current, 
-                                                    *args, **kwargs):
+    def __init__(self, master, controller, label, width, 
+            minimum, maximum, current, *args, **kwargs):
         super(View, self).__init__(master, *args, **kwargs)
         self._controller = controller
+        self._create_label(label, width)
         self._create_spinbox(minimum, maximum)
         self._create_scale(minimum, maximum)
+    
+    def w_label(self):
+        return self._label
     
     def w_spinbox(self):
         return self._spinbox
 
     def w_scale(self):
         return self._scale
+    
+    def _create_label(self, label, width):
+        self._label = LabelTtk(self, text=label)
+        
+        if width:
+            self._label.config(width=width)
+            
+        self._label.pack(side='left', anchor='s')
     
     def _create_spinbox(self, minimum, maximum):
         self._spinbox = Spinbox(self, from_=minimum, to=maximum)
@@ -62,9 +75,9 @@ class View(Frame):
 
 
 class Controller(object):
-    def __init__(self, master, minimum, maximum, current):
+    def __init__(self, master, label, width, minimum, maximum, current):
         self._model = Model(minimum, maximum, current)
-        self._view = View(master, self, minimum, maximum, current)
+        self._view = View(master, self, label, width, minimum, maximum, current)
     
     def view(self):
         '''
@@ -137,8 +150,10 @@ def main():
     # instanciando
     maximum = 797_554
     minimum = current = 0
+    label = 'Ponts'
+    width = 10
     
-    controller = Controller(root, minimum, maximum, current)    
+    controller = Controller(root, label, width, minimum, maximum, current)    
     slider = controller.view()
     slider.pack(fill='x')
     
